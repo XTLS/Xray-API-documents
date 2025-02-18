@@ -27,7 +27,9 @@ func addInbound(client command.HandlerServiceClient) error {
 			Tag: "proxy0",
 			ReceiverSettings: serial.ToTypedMessage(&proxyman.ReceiverConfig{
 				// 监听端口 12345
-				PortRange: net.SinglePortRange(net.Port(12360)),
+				PortList: &net.PortList{
+					Range: []*net.PortRange{net.SinglePortRange(12360)},
+				},
 				// 监听地址, 默认0.0.0.0
 				Listen: net.NewIPOrDomain(net.AnyIP),
 				// 流量探测
@@ -61,11 +63,8 @@ func addInbound(client command.HandlerServiceClient) error {
 							*/
 							Settings: serial.ToTypedMessage(&websocket.Config{
 								Path: "/web",
-								Header: []*websocket.Header{
-									{
-										Key:   "Host",
-										Value: "www.xray.best",
-									},
+								Header: map[string]string{
+									"Host": "www.xray.best",
 								},
 								AcceptProxyProtocol: false,
 							},
@@ -101,8 +100,7 @@ func addInbound(client command.HandlerServiceClient) error {
 						Level: 0,
 						Email: "love@xray.com",
 						Account: serial.ToTypedMessage(&vmess.Account{
-							Id:      "10354ac4-9ec1-4864-ba3e-f5fd35869ef8",
-							AlterId: 1,
+							Id: "10354ac4-9ec1-4864-ba3e-f5fd35869ef8",
 						}),
 					},
 				},

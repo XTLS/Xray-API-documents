@@ -1,32 +1,30 @@
 package examples
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestAlertInbound(t *testing.T) {
+func TestGetInboundUsers(t *testing.T) {
+	// 先指定 API 端口和地址
 	var (
 		xrayCtl *XrayController
 		cfg     = &BaseConfig{
 			APIAddress: "127.0.0.1",
 			APIPort:    10085,
 		}
-		user = UserInfo{
-			Uuid:       "10354ac4-9ec1-4864-ba3e-f5fd35869ef8",
-			Level:      0,
-			InTag:      "proxy0",
-			Email:      "love@xray.com",
-			CipherType: "aes-256-gcm",
-			Password:   "xrayisthebest",
-		}
 	)
+
 	xrayCtl = new(XrayController)
 	err := xrayCtl.Init(cfg)
 	defer xrayCtl.CmdConn.Close()
 	if err != nil {
 		t.Errorf("Failed %s", err)
 	}
-	err = addVmessUser(xrayCtl.HsClient, &user)
+	users, err := getInboundUsers(xrayCtl.HsClient)
 	if err != nil {
 		t.Errorf("Failed %s", err)
 	}
+	fmt.Println(users)
 
 }
