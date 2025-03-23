@@ -9,6 +9,7 @@ AlterInbound()
 AddOutbound()
 RemoveOutbound()
 AlterOutbound()
+getInboundUsers()
 ```
 
 ## AddInbound
@@ -19,5 +20,8 @@ AlterOutbound()
 
 ## AlterInbound
 在一个入站代理中添加一个用户 (VMess, VLESS, Trojan, ShadowSocks)
+
+## getInboundUsers
+获取一个入站代理的用户列表
 
 > Outbound 同理

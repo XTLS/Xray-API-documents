@@ -17,9 +17,8 @@ type BaseConfig struct {
 type UserInfo struct {
 	// For VMess & Trojan
 	Uuid string
-	// For VMess
-	AlertId uint32
-	Level   uint32
+	// User's Level
+	Level uint32
 	// Which Inbound will add this user
 	InTag string
 	// User's Email, it's a unique identifier for users

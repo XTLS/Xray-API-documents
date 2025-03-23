@@ -26,8 +26,7 @@ func addVmessUser(client command.HandlerServiceClient, user *UserInfo) error {
 				请在 github.com/xtls/xray-core/proxy/PROXYTYPE 下寻找 Account 结构体
 				*/
 				Account: serial.ToTypedMessage(&vmess.Account{
-					Id:      user.Uuid,
-					AlterId: user.AlertId,
+					Id: user.Uuid,
 				}),
 			},
 		}),
